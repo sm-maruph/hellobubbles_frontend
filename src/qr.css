@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #f2f2f2; }
+
+.qr-screen { display: flex; justify-content: center; padding: 16px; }
+
+.qr-card {
+  position: relative;
+  width: 100%; max-width: 420px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='none' stroke='%23eceae3' stroke-width='2'%3E%3Cpath d='M18 28 q18 -16 36 0 q-18 16 -36 0 Z'/%3E%3Ccircle cx='112' cy='36' r='6'/%3E%3Ccircle cx='126' cy='50' r='4'/%3E%3Cpath d='M38 118 q28 -22 52 0'/%3E%3Ccircle cx='28' cy='108' r='5'/%3E%3Cpath d='M96 96 q16 -14 30 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 150px;
+  border-radius: 16px;
+  padding: 22px 18px;
+}
+
+.brand { text-align: center; margin-bottom: 2px; }
+.brand__script { font-family: "Pacifico", cursive; font-size: 30px; color: #d62828; }
+.brand__bold { font-size: 26px; font-weight: 800; letter-spacing: -.5px; margin-left: 2px; }
+.welcome { text-align: center; font-size: 13px; font-weight: 700; margin: 6px 0 16px; }
+
+.link-btn {
+  position: relative;
+  display: flex; align-items: center; gap: 12px;
+  border-radius: 12px; padding: 12px 16px; text-decoration: none; color: #fff;
+}
+.link-btn--red { background: #d62828; }
+.link-btn--dark { background: #161616; }
+.link-btn__icon { font-size: 24px; display: flex; }
+.link-btn__text { display: flex; flex-direction: column; line-height: 1.3; }
+.link-btn__text strong { font-size: 15px; }
+.link-btn__text span { font-size: 12px; opacity: .95; }
+.link-btn__caption { text-align: center; font-size: 12px; color: #555; margin: 6px 0 12px; }
+.link-btn + .link-btn { margin-top: 11px; }
+
+.info-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  border-top: 1px solid #e6e3dc; border-bottom: 1px solid #e6e3dc;
+  padding: 14px 0; margin: 14px 0;
+}
+.info-card {
+  display: flex; gap: 8px;
+  border: 1px solid #ece9e2; border-radius: 10px; padding: 8px;
+  text-decoration: none; color: #161616; background: #fff;
+}
+.info-card__title { font-size: 12px; font-weight: 800; line-height: 1.15; }
+.info-card__text { font-size: 9.5px; color: #777; margin-top: 3px; }
+.offer-media { text-align: center; flex-shrink: 0; }
+.offer-media__tag { display: block; font-size: 7px; font-weight: 700; color: #d62828; line-height: 1.1; margin-top: 2px; max-width: 48px; }
+
+.wonders { text-align: center; font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+.drink-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.drink-tile { aspect-ratio: .85; border-radius: 10px; overflow: hidden; background: #eee; }
+.drink-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+.qr-footer { position: relative; text-align: center; color: #666; padding-bottom: 4px; }
+.qr-footer p { font-size: 11px; }
+.qr-footer__url { font-weight: 600; color: #444; }
+.qr-footer__heart { position: absolute; right: 2px; bottom: 0; }
+
+.state { text-align: center; padding: 40px; color: #666; }
