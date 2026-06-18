@@ -200,7 +200,7 @@ body {
   position: relative;
   text-align: center;
   color: #666;
-  padding: 0 36px 4px;
+  padding: 0 20px 4px;
 }
 
 .qr-footer p {
@@ -225,8 +225,8 @@ body {
   justify-content: space-between;
   gap: 10px;
   border-top: 1px solid #e6e3dc;
-  padding-top: 22px;
-  margin-top: 30px;
+  padding-top: 12px;
+  margin-top: 20px;
 }
 
 .contact-bar__icon {
