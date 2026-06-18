@@ -83,7 +83,11 @@ body {
 }
 
 .link-btn__icon {
+<<<<<<< HEAD
   font-size: 26px;
+=======
+  font-size: 50px;
+>>>>>>> 80923e5 (third push)
   display: flex;
   flex-shrink: 0;
 }
@@ -95,7 +99,11 @@ body {
 }
 
 .link-btn__text strong {
+<<<<<<< HEAD
   font-size: 16px;
+=======
+  font-size: 16px;
+>>>>>>> 80923e5 (third push)
 }
 
 .link-btn__text span {
@@ -105,13 +113,21 @@ body {
 
 .link-btn__caption {
   text-align: center;
+<<<<<<< HEAD
   font-size: 12px;
+=======
+  font-size: 12px;
+>>>>>>> 80923e5 (third push)
   color: #555;
   margin: 6px 0 12px;
 }
 
 .link-btn+.link-btn {
+<<<<<<< HEAD
   margin-top: 11px;
+=======
+  margin-top: 11px;
+>>>>>>> 80923e5 (third push)
 }
 
 /* info row: black lines above & below */
