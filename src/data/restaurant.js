@@ -8,7 +8,7 @@ export const restaurant = {
     name: "Hello Bubbles",
     welcome_text: "Welcome in-store! Tap to connect & share.",
     instagram_handle: "@HelloBubbles",
-    instagram_url: "#",
+    instagram_url: "https://www.instagram.com/hellobubbles.officials",
     google_review_url: "https://www.google.com/search?sca_esv=d27764c230e87959&hl=en-GB&sxsrf=ANbL-n6yaS3CEz0s6H6w1gAUk1DuA4kjbA:1781715370236&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOZxFYoV4YOdp9FlW5tO86tJLqyMa0-nzkUa06yB7kkaFNygFMa2KKhl9snimevDIl5fmmQuYj20tt4WGAXNtmzoCtosm&q=Hello+Bubbles+Reviews&sa=X&ved=2ahUKEwix_e793o6VAxUEXusIHbMHM-QQ0bkNegQILhAF&biw=766&bih=728&dpr=1.25",
     rating: 4.9,
     review_count: 120,
