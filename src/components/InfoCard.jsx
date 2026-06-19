@@ -1,7 +1,14 @@
 export default function InfoCard({ media, title, text, href, onClick }) {
+  const mediaContent =
+    typeof media === "string" ? (
+      <img src={media} alt="" className="info-card__image" />
+    ) : (
+      media
+    );
+
   const inner = (
     <>
-      <div className="info-card__media">{media}</div>
+      <div className="info-card__media">{mediaContent}</div>
       <div className="info-card__body">
         <div className="info-card__title">{title}</div>
         <div className="info-card__text">{text}</div>

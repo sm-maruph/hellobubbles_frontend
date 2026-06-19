@@ -159,6 +159,13 @@ body {
   flex-shrink: 0;
 }
 
+.info-card__image {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+}
+
 .offer-media__tag {
   display: block;
   font-size: 10px;
@@ -217,10 +224,12 @@ body {
   right: 2px;
   bottom: 0;
 }
+
 .qr-footer__heart img {
   height: 18px;
   width: auto;
-} 
+}
+
 /* footers pushed lower */
 .contact-bar {
   display: flex;

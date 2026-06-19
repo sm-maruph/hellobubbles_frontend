@@ -7,6 +7,7 @@ import DrinkGallery from "../components/DrinkGallery";
 import { DoubleHeart, CupIcon, OfferBadge } from "../components/Icon";
 import logo from "../assets/Hello_Bubbles_Logo.png";
 import offer from "../assets/offer.png";
+import web from "../assets/web.png";
 
 import { restaurant as data } from "../data/restaurant";
 
@@ -94,7 +95,7 @@ export default function QrPage() {
         {/* INFO CARDS */}
         <div className="info-row">
           <InfoCard
-            media={<CupIcon size={46} />}
+            media={web}
             title="VIEW OUR WEBSITE"
             text="Explore flavors and customizations."
             onClick={() => setModal("soon")}
