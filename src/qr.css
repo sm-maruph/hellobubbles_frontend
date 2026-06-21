@@ -34,7 +34,7 @@ body,
 ========================= */
 
 .qr-card {
-  --u: clamp(9px, min(2.15vh, 4vw), 16px);
+  --u: clamp(9px, min(2.1dvh, 4vw), 16px);
 
   width: min(100vw, 480px);
   height: 100dvh;            /* dynamic viewport height (handles mobile browser chrome) */
@@ -43,7 +43,11 @@ body,
   flex-direction: column;
   gap: calc(var(--u) * 0.5);
 
-  padding: calc(var(--u) * 1.1) calc(var(--u) * 1.25);
+  padding:
+    max(calc(var(--u) * 1.0), env(safe-area-inset-top, 0px))
+    calc(var(--u) * 1.25)
+    max(calc(var(--u) * 1.4), calc(env(safe-area-inset-bottom, 0px) + var(--u) * 0.5))
+    calc(var(--u) * 1.25);
 
   font-size: var(--u);       /* base text size */
   background: #fff;
@@ -228,7 +232,7 @@ body,
   gap: calc(var(--u) * 0.35);
 
   flex: 1 1 auto;             /* fills the leftover vertical space */
-  min-height: calc(var(--u) * 4.5);
+  min-height: calc(var(--u) * 3.4);
   overflow: hidden;
 }
 
