@@ -1,10 +1,10 @@
-import { useRef, useState, useLayoutEffect } from "react";
+import { useState } from "react";
 import { FaInstagram, FaTiktok, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import LinkButton from "../components/LinkButton";
 import InfoCard from "../components/InfoCard";
 import DrinkGallery from "../components/DrinkGallery";
-import { DoubleHeart, CupIcon, OfferBadge } from "../components/Icon";
+import { DoubleHeart, OfferBadge } from "../components/Icon";
 import logo from "../assets/Hello_Bubbles_Logo.png";
 import offer from "../assets/offer.png";
 import web from "../assets/web.png";
@@ -12,42 +12,7 @@ import web from "../assets/web.png";
 import { restaurant as data } from "../data/restaurant";
 
 export default function QrPage() {
-  const cardRef = useRef(null);
-  const [scale, setScale] = useState(1);
   const [modal, setModal] = useState(null); // "soon" | "offer" | null
-
-  useLayoutEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    let frame;
-
-    const fit = () => {
-      cancelAnimationFrame(frame);
-
-      frame = requestAnimationFrame(() => {
-        const w = el.offsetWidth;
-        const h = el.offsetHeight;
-        if (!w || !h) return;
-
-        const s = Math.min(
-          window.innerWidth / w,
-          window.innerHeight / h,
-          1.3
-        );
-
-        setScale(isNaN(s) ? 1 : s);
-      });
-    };
-
-    fit();
-    window.addEventListener("resize", fit);
-
-    return () => {
-      window.removeEventListener("resize", fit);
-      cancelAnimationFrame(frame);
-    };
-  }, []);
 
   const mapsUrl =
     data.maps_url ||
@@ -57,13 +22,8 @@ export default function QrPage() {
 
   return (
     <div className="fit-screen">
-
-      {/* MAIN CARD */}
-      <div
-        className="qr-card"
-        ref={cardRef}
-        style={{ transform: `scale(${scale})` }}
-      >
+      {/* MAIN CARD — fills the whole screen, content scales to fit */}
+      <div className="qr-card">
         <img src={logo} alt="Hello Bubbles" className="brand-logo" />
         <p className="welcome">{data.welcome_text}</p>
 
@@ -165,7 +125,7 @@ export default function QrPage() {
             top: 0,
             left: 0,
             width: "100vw",
-            height: "100vh",
+            height: "100dvh",
             background: "rgba(0,0,0,0.6)",
             display: "flex",
             alignItems: "center",
@@ -177,7 +137,8 @@ export default function QrPage() {
             onClick={(e) => e.stopPropagation()}
             style={{
               width: "auto",
-              height: "80vh",
+              maxWidth: "90vw",
+              maxHeight: "85dvh",
               background: "#fff",
               borderRadius: "12px",
               padding: "20px",
@@ -201,7 +162,7 @@ export default function QrPage() {
                 alt="Offer"
                 style={{
                   maxWidth: "100%",
-                  maxHeight: "100%",
+                  maxHeight: "70dvh",
                   objectFit: "contain",
                 }}
               />
