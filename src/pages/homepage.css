@@ -1,0 +1,156 @@
+.home-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf6f8, #fff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+}
+
+.content {
+  text-align: center;
+  z-index: 10;
+  max-width: 700px;
+  animation: fadeUp 1.2s ease;
+}
+
+.logo {
+  width: 680px;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+h1 {
+  color: #ff4f87;
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #666;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.coming-soon {
+  margin-top: 15px;
+  font-size: 1.2rem;
+}
+
+.action-box {
+  margin-top: 35px;
+}
+
+.qr-btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 14px 35px;
+  background: #ff4f87;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.qr-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 79, 135, 0.3);
+}
+
+.floating-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 79, 135, 0.15);
+  animation: bubbleFloat 12s infinite linear;
+}
+
+.bubble1 {
+  width: 120px;
+  height: 120px;
+  left: 10%;
+  bottom: -120px;
+}
+
+.bubble2 {
+  width: 80px;
+  height: 80px;
+  left: 80%;
+  bottom: -80px;
+  animation-delay: 2s;
+}
+
+.bubble3 {
+  width: 150px;
+  height: 150px;
+  left: 65%;
+  bottom: -150px;
+  animation-delay: 4s;
+}
+
+.bubble4 {
+  width: 60px;
+  height: 60px;
+  left: 30%;
+  bottom: -60px;
+  animation-delay: 6s;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  .logo {
+    width: 350px;
+  }
+}
