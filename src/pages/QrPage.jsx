@@ -157,15 +157,19 @@ export default function QrPage() {
             )}
 
             {modal === "offer" && (
-              <img
-                src={offer}
-                alt="Offer"
-                style={{
-                  maxWidth: "100%",
-                  maxHeight: "70dvh",
-                  objectFit: "contain",
-                }}
-              />
+              // <img
+              //   src={offer}
+              //   alt="Offer"
+              //   style={{
+              //     maxWidth: "100%",
+              //     maxHeight: "70dvh",
+              //     objectFit: "contain",
+              //   }}
+              // />
+              <>
+                <h3>Our Offer will be available soon!</h3>
+                <p>Thanks for your patience!</p>
+              </>
             )}
 
             <button
