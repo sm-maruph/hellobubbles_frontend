@@ -1,0 +1,113 @@
+/* =========================================================
+   CENTRAL THEME — Elegant Dark / Chilli Red (#d62828)
+   Single source of truth for the site's look.
+   Change a value here and it updates everywhere.
+   (Admin panel can override these at runtime via theme.js)
+========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap");
+
+:root {
+  /* ---------- COLORS ---------- */
+  --color-bg: #16110f;          /* solid deep charcoal (navbar / footer) */
+  --color-surface: #211b18;     /* cards on the dark background */
+  --color-heading: #f6f1ea;     /* soft warm white headings */
+  --color-text: #d8cfc6;        /* body text */
+  --color-muted: #9a8f85;       /* secondary / subtitle text */
+  --color-primary: #d62828;     /* accent: buttons, prices, links */
+  --color-primary-strong: #b41f1f;
+  --color-on-primary: #ffffff;  /* text on a filled red button */
+  --color-border: rgba(246, 241, 234, 0.1);
+
+  /* elegant dark page background (used by <body>) */
+  --bg-elegant:
+    radial-gradient(90% 60% at 50% -15%, rgba(214, 40, 40, 0.12), transparent 60%),
+    linear-gradient(180deg, #1a1411 0%, #16110f 55%, #100c0a 100%);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Poppins", system-ui, -apple-system, sans-serif;
+
+  --fs-hero: clamp(2.2rem, 5vw, 3.5rem);
+  --fs-h2: clamp(1.7rem, 3.5vw, 2.4rem);
+  --fs-lg: 1.125rem;
+  --fs-base: 1rem;
+  --fs-sm: 0.875rem;
+
+  /* ---------- LAYOUT ---------- */
+  --container: 1140px;
+  --container-narrow: 620px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --section-y: clamp(2.5rem, 7vw, 5rem);
+
+  /* ---------- RADIUS / SHADOW ---------- */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-sm: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- BASE / RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--bg-elegant);
+  background-color: #100c0a;        /* fallback under the gradient */
+  background-attachment: fixed;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-heading);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- LAYOUT UTILITY ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+:where(a, button):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

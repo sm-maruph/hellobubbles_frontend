@@ -1,0 +1,23 @@
+.reviews {
+  padding-block: var(--section-y);
+}
+
+.reviews__title {
+  text-align: center;
+  font-size: var(--fs-h2);
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+@media (max-width: 860px) {
+  .reviews__grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-inline: auto;
+  }
+}

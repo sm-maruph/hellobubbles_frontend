@@ -1,0 +1,50 @@
+.cta-banner {
+  padding-bottom: var(--section-y);
+}
+
+.cta-banner__inner {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  text-align: center;
+
+  min-height: clamp(220px, 32vw, 300px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.cta-banner__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* dark overlay so the text stays readable over any image */
+.cta-banner__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 16, 12, 0.55);
+  z-index: -1;
+}
+
+.cta-banner__content {
+  padding: clamp(1.5rem, 5vw, 3rem);
+}
+
+.cta-banner__title {
+  color: #fff;
+  font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+  line-height: 1.25;
+  max-width: 20ch;
+  margin: 0 auto 1.4rem;
+}
+
+/* keep the solid button readable on the dark banner */
+.cta-banner__btn {
+  --on-dark: #fff;
+}

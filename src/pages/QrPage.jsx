@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTiktok, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import LinkButton from "../components/LinkButton";
@@ -8,11 +9,17 @@ import { DoubleHeart, OfferBadge } from "../components/Icon";
 import logo from "../assets/Hello_Bubbles_Logo.png";
 import offer from "../assets/offer.png";
 import web from "../assets/web.png";
+import "../qr.css";
 
 import { restaurant as data } from "../data/restaurant";
 
 export default function QrPage() {
   const [modal, setModal] = useState(null); // "soon" | "offer" | null
+  const navigate = useNavigate();
+  useEffect(() => {
+    document.body.classList.add("qr-lock");
+    return () => document.body.classList.remove("qr-lock"); // unlock on leave
+  }, []);
 
   const mapsUrl =
     data.maps_url ||
@@ -58,7 +65,7 @@ export default function QrPage() {
             media={web}
             title="VIEW OUR WEBSITE"
             text="Explore flavors and customizations."
-            onClick={() => setModal("soon")}
+            onClick={() => { window.location.href = "/"; }}
           />
 
           <InfoCard
@@ -80,7 +87,7 @@ export default function QrPage() {
         <DrinkGallery drinks={data.drinks} />
 
         <footer className="qr-footer">
-          <p className="qr-footer__url">{data.website_label}</p>
+          {/* <p className="qr-footer__url">{data.website_label}</p> */}
           <p>Made with love by {data.name}</p>
           <span className="qr-footer__heart">
             <DoubleHeart size={28} />

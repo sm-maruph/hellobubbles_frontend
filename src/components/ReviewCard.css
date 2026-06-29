@@ -1,0 +1,44 @@
+.review-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: clamp(1.2rem, 2.5vw, 1.6rem);
+}
+
+.review-card__quote {
+  color: var(--color-text);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+}
+
+.review-card__author {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.review-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-border);
+}
+
+.review-card__name {
+  font-weight: 600;
+  color: var(--color-heading);
+  font-size: var(--fs-sm);
+}
+
+.review-card__role {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
