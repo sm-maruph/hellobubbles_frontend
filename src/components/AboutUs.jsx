@@ -1,4 +1,4 @@
-import "./AboutUs.css";
+import "./Aboutus.css";
 
 /* Dummy images — swap for your backend URLs later.
    Lorem Picsum is reliable and deterministic per seed. For food-themed
