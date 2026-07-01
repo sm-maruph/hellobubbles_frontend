@@ -1,34 +1,45 @@
-export function DoubleHeart({ size = 22, color = "#1b1b1b" }) {
-  return (
-    <svg width={size} height={size * 0.8} viewBox="0 0 64 48" fill="none"
-      stroke={color} strokeWidth="2" style={{ verticalAlign: "middle" }}>
-      <path d="M20 12c-3-6-12-6-13 1-1 7 7 12 13 18 6-6 14-11 13-18-1-7-10-7-13-1z" />
-      <path d="M40 8c-3-6-12-6-13 1-1 7 7 12 13 18 6-6 14-11 13-18-1-7-10-7-13-1z" />
-    </svg>
-  );
-}
+/* Small inline icons (no icon library needed). All use currentColor. */
 
-export function CupIcon({ size = 34 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" style={{ flexShrink: 0 }}>
-      <rect x="13" y="9" width="22" height="5" rx="2" fill="#9bb3c9" />
-      <path d="M15 14h18l-2 30a3 3 0 0 1-3 3H20a3 3 0 0 1-3-3z" fill="#dcecf5" stroke="#9bb3c9" strokeWidth="1.5" />
-      <circle cx="20" cy="41" r="2" fill="#4a2c1a" />
-      <circle cx="25" cy="43" r="2" fill="#4a2c1a" />
-      <circle cx="29" cy="41" r="2" fill="#4a2c1a" />
-      <circle cx="24" cy="45" r="2" fill="#4a2c1a" />
-    </svg>
-  );
-}
+export const HeartIcon = ({ filled = false, size = 18 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size}
+    fill={filled ? "currentColor" : "none"} stroke="currentColor"
+    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 20s-7-4.35-9.3-8.5C1.2 8.9 2.5 5.9 5.5 5.5c1.9-.25 3.4.9 4.5 2.3C11.1 6.4 12.6 5.25 14.5 5.5c3 .4 4.3 3.4 2.8 6-2.3 4.15-9.3 8.5-9.3 8.5z" />
+  </svg>
+);
 
-export function OfferBadge({ size = 32 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-      <circle cx="15" cy="15" r="12" fill="#e24b4a" />
-      <text x="15" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff">%</text>
-      <rect x="21" y="22" width="13" height="11" rx="1.5" fill="#e8b04b" />
-      <rect x="21" y="25" width="13" height="3" fill="#c8922f" />
-      <rect x="26.5" y="22" width="2" height="11" fill="#c8922f" />
-    </svg>
-  );
-}
+export const BagIcon = ({ size = 18 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor"
+    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 7h12l1 13H5L6 7z" />
+    <path d="M9 7a3 3 0 0 1 6 0" />
+  </svg>
+);
+
+export const ReceiptIcon = ({ size = 18 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor"
+    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z" />
+    <path d="M9 7h6M9 11h6M9 15h4" />
+  </svg>
+);
+
+export const QrIcon = ({ size = 20 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="currentColor" aria-hidden="true">
+    <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm11-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 0h2v2h-2v-2zm0-4h2v2h-2v-2z" />
+  </svg>
+);
+
+export const XIcon = ({ size = 18 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor"
+    strokeWidth="2" strokeLinecap="round">
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+);
+
+export const TrashIcon = ({ size = 16 }) => (
+  <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor"
+    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" />
+  </svg>
+);
