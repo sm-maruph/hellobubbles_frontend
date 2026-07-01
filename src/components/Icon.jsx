@@ -43,3 +43,24 @@ export const TrashIcon = ({ size = 16 }) => (
     <path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13" />
   </svg>
 );
+export const DoubleHeart = ({ size = 28 }) => (
+  <svg width={size} height={size} viewBox="0 0 48 24" fill="none" aria-hidden="true">
+    <path d="M12 21S3 15 3 8.5A5 5 0 0 1 12 5a5 5 0 0 1 9 3.5C21 15 12 21 12 21z" fill="#d62828" />
+    <path d="M30 21s-9-6-9-12.5A5 5 0 0 1 30 5a5 5 0 0 1 9 3.5C39 15 30 21 30 21z" fill="#161616" />
+  </svg>
+);
+
+export const OfferBadge = ({ size = 42 }) => (
+  <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
+    <circle cx="24" cy="24" r="22" fill="#d62828" />
+    <path d="M17 17h2v2h-2zM29 29h2v2h-2zM17 31 31 17" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+export const CupIcon = ({ size = 32 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M6 8h12l-1 11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8z" />
+    <path d="M8 8V5a4 4 0 0 1 8 0v3" />
+  </svg>
+);
