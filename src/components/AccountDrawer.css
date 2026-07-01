@@ -1,0 +1,201 @@
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.drawer__panel {
+  width: min(400px, 100%);
+  height: 100%;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  animation: drawer-in 0.22s ease;
+}
+
+@keyframes drawer-in {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.drawer__tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.6rem 0.6rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.drawer__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  padding: 0.6rem 0.6rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.drawer__tab.is-active {
+  color: var(--color-heading);
+  border-bottom-color: var(--color-primary);
+}
+
+.drawer__close {
+  margin-left: auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  align-self: flex-start;
+}
+.drawer__close:hover { color: var(--color-primary); }
+
+.drawer__body {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.drawer__empty {
+  color: var(--color-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* rows (fav + cart) */
+.drow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.drow__img {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--color-bg);
+}
+.drow__main {
+  flex: 1;
+  min-width: 0;
+}
+.drow__name {
+  font-size: var(--fs-sm);
+  color: var(--color-heading);
+  font-weight: 500;
+}
+.drow__price {
+  font-size: var(--fs-sm);
+  color: var(--color-primary);
+}
+.drow__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+.drow__btn {
+  font-size: 0.75rem;
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+.drow__icon {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  cursor: pointer;
+  padding: 2px;
+}
+.drow__icon:hover { color: var(--color-primary); }
+
+.drow__qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.drow__qty button {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1;
+}
+.drow__qty button:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+/* cart footer */
+.drawer__cartfoot {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.drawer__total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: var(--color-heading);
+}
+.drawer__order { width: 100%; }
+.drawer__clear {
+  background: none;
+  border: none;
+  color: var(--color-muted);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+.drawer__clear:hover { color: var(--color-primary); }
+
+/* orders */
+.ocard {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ocard__head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-heading);
+  font-size: var(--fs-sm);
+}
+.ocard__head span { color: var(--color-muted); font-weight: 400; }
+.ocard__items {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+}
+.ocard__foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-sm);
+  color: var(--color-muted);
+}
+.ocard__foot strong { color: var(--color-primary); }

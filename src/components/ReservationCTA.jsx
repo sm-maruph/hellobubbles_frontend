@@ -7,8 +7,8 @@ import "./ReservationCTA.css";
  */
 export default function ReservationCTA({
   title = "Elevate your dining experience to a higher quality.",
-  ctaLabel = "Make a Reservation",
-  ctaHref = "#reservations",
+  ctaLabel = "Make an Order",
+  ctaHref = "#menu",
   image = "https://picsum.photos/seed/eatery-reserve/1400/600",
   imageAlt = "",
   id = "reservations",

@@ -3,12 +3,12 @@ import "./Hero.css";
 import heroImg from "../assets/fuscka.jpg";
 
 export default function Hero({
-  title = "Eatery — Savor the Flavor",
+  title = "Hello Bubbles — Savor the Flavor",
   subtitle = "Indulge in our handcrafted dishes, where flavors meet love. Join us for an unforgettable culinary journey!",
-  ctaLabel = "Make a Reservation",
-  ctaHref = "#reservations",
+  ctaLabel = "Make a Order",
+  ctaHref = "#menu",
   image,
-  imageAlt = "Signature dish at Eatery",
+  imageAlt = "Signature dish at Hello Bubbles",
   id = "home",
 }) {
   const src = image || heroImg; // empty string / undefined → use the bundled image

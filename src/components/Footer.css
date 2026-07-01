@@ -1,5 +1,5 @@
 .footer {
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-text);
   padding-top: clamp(2.5rem, 6vw, 4rem);
 }

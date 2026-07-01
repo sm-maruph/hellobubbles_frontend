@@ -4,16 +4,16 @@ import "./Footer.css";
 const DEFAULT_LINKS = [
   { label: "About", href: "#about" },
   { label: "Menu", href: "#menu" },
-  { label: "Reservations", href: "#reservations" },
+  { label: "Order Now", href: "#menu" },
   { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Footer({
-  logo = "Eatery",
-  tagline = "Unforgettable Culinary Experiences Await at Heaven Palate",
-  reserveLabel = "Reserve Table →",
-  reserveHref = "#reservations",
+  logo = "Hello Bubbles",
+  tagline = "Unforgettable Culinary Experiences Await at Hello Bubbles",
+  reserveLabel = "Order Now →",
+  reserveHref = "#menu",
 
   pagesTitle = "Pages",
   links = DEFAULT_LINKS,
@@ -27,7 +27,7 @@ export default function Footer({
     "Sunday : 6:00 AM – 12:00 PM",
   ],
 
-  brandName = "Eatery",
+  brandName = "Hello Bubbles",
   year = new Date().getFullYear(),
 }) {
   return (
@@ -86,8 +86,10 @@ export default function Footer({
         </div>
 
         <div className="footer__bottom">
-          {year} <span className="footer__brand-name">{brandName}</span>, rights
-          reserved
+          © All rights reserved by <span className="footer__brand-name">{brandName}</span>, {year}.
+        </div>
+        <div className="footer__bottom">
+          Developed by <span className="footer__brand-name">Theatives</span>
         </div>
       </div>
     </footer>

@@ -1,37 +1,40 @@
 import { useState } from "react";
 import Button from "./Button";
+import { useShop } from "../store/UseShop";
+import { HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
 import "./Navbar.css";
 
 const DEFAULT_LINKS = [
   { label: "About", href: "#about" },
   { label: "Menu", href: "#menu" },
-  { label: "Reservations", href: "#reservations" },
+  { label: "Location", href: "#location" },
   { label: "Blog", href: "#blog" },
   { label: "Contact", href: "#contact" },
 ];
 
-/* Minimal inline QR glyph — no icon library required */
-function QrIcon({ size = 20 }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm11-2h2v2h-2v-2zm2 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm2 2h2v2h-2v-2zm-4 0h2v2h-2v-2zm0-4h2v2h-2v-2z" />
-    </svg>
-  );
+function Count({ n }) {
+  if (!n) return null;
+  return <span className="navbar__count">{n}</span>;
 }
 
 export default function Navbar({
   logo = "Hello Bubbles",
   links = DEFAULT_LINKS,
-  cta = { label: "Book Table", href: "#reservations" },
   qrHref = "/qr",
 }) {
   const [open, setOpen] = useState(false);
+  const { favCount, cartCount, ordersCount, openDrawer, orderCart, cart } = useShop();
+
+  const close = () => setOpen(false);
+  const goDrawer = (tab) => {
+    openDrawer(tab);
+    close();
+  };
+  const orderPickup = () => {
+    if (cart.length) orderCart();
+    else openDrawer("cart");
+    close();
+  };
 
   return (
     <header className="navbar">
@@ -56,37 +59,61 @@ export default function Navbar({
             <ul className="navbar__links">
               {links.map((l) => (
                 <li key={l.label}>
-                  <a
-                    className="navbar__link"
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                  >
+                  <a className="navbar__link" href={l.href} onClick={close}>
                     {l.label}
                   </a>
                 </li>
               ))}
             </ul>
 
-            <a
-              className="navbar__qr"
-              href={qrHref}
-              aria-label="Open QR page"
-              title="QR page"
-              onClick={() => setOpen(false)}
-            >
-              <QrIcon />
-            </a>
+            <div className="navbar__tools">
+              <button
+                className="navbar__icon"
+                aria-label="Favourites"
+                onClick={() => goDrawer("favorites")}
+              >
+                <HeartIcon />
+                <Count n={favCount} />
+              </button>
 
-            <Button
-              as="a"
-              href={cta.href}
-              variant="outline"
-              size="sm"
-              className="navbar__cta"
-              onClick={() => setOpen(false)}
-            >
-              {cta.label}
-            </Button>
+              <button
+                className="navbar__icon"
+                aria-label="Cart"
+                onClick={() => goDrawer("cart")}
+              >
+                <BagIcon />
+                <Count n={cartCount} />
+              </button>
+
+              <button
+                className="navbar__icon"
+                aria-label="Orders"
+                onClick={() => goDrawer("orders")}
+              >
+                <ReceiptIcon />
+                <Count n={ordersCount} />
+              </button>
+
+              <a
+                className="navbar__qr"
+                href={qrHref}
+                aria-label="Open QR page"
+                title="QR page"
+                onClick={close}
+              >
+                <QrIcon />
+                <span className="navbar__qr-label">Scan QR</span>
+              </a>
+
+              <Button
+                variant="solid"
+                size="sm"
+                className="navbar__order"
+                onClick={orderPickup}
+              >
+                Order Pickup
+              </Button>
+            </div>
           </nav>
         </div>
       </div>

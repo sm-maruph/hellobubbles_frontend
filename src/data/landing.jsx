@@ -11,26 +11,30 @@ export const landingData = {
     links: [
       { label: "About", href: "#about" },
       { label: "Menu", href: "#menu" },
-      { label: "Reservations", href: "#reservations" },
+      { label: "Make an Order", href: "#menu" },
       { label: "Blog", href: "#blog" },
       { label: "Contact", href: "#contact" },
     ],
-    cta: { label: "Book Table", href: "#reservations" },
+    cta: { label: "Make an Order", href: "#menu" },
   },
 
   hero: {
     title: "Hello Bubbles — Savor the Flavor",
     subtitle:
       "Indulge in our handcrafted dishes, where flavors meet love. Join us for an unforgettable culinary journey!",
-    ctaLabel: "Make a Reservation",
-    ctaHref: "#reservations",
+    ctaLabel: "Make An Order",
+    ctaHref: "#menu",
     image: "", // e.g. "/images/hero.jpg" or a URL from your backend
   },
 
   about: {
     title: "About Us",
-    text:
-      "Welcome to Hello Bubbles, where passion meets flavor. We're dedicated to serving handcrafted dishes with love. Our story began with a desire to share warmth through food. Join us for an unforgettable culinary experience.",
-    images: ["", "", "", ""], // up to 4 image URLs
-  },
+    text: "Welcome to Hello Bubbles...",
+    images: [
+      "https://picsum.photos/seed/hb-about1/600/400",
+      "https://picsum.photos/seed/hb-about2/600/400",
+      "https://picsum.photos/seed/hb-about3/600/400",
+      "https://picsum.photos/seed/hb-about4/800/400",
+    ],
+  }
 };
