@@ -25,6 +25,15 @@
   font-size: 1.4rem;
   color: var(--color-heading);
 }
+.navbar__logo-img {
+  display: block;
+  height: 36px;          /* controls the logo size — adjust to taste */
+  width: auto;
+}
+
+@media (max-width: 560px) {
+  .navbar__logo-img { height: 30px; }   /* a bit smaller on phones */
+}
 
 .navbar__nav {
   display: flex;

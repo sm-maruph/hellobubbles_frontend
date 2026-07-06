@@ -3,7 +3,7 @@ import Button from "./Button";
 import { useShop } from "../store/UseShop";
 import { HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
 import "./Navbar.css";
-
+import logo from "../assets/hb_logo.png";
 const DEFAULT_LINKS = [
   { label: "About", href: "#about" },
   { label: "Menu", href: "#menu" },
@@ -18,7 +18,7 @@ function Count({ n }) {
 }
 
 export default function Navbar({
-  logo = "Hello Bubbles",
+  // logo = "Hello Bubbles",
   links = DEFAULT_LINKS,
   qrHref = "/qr",
 }) {
@@ -41,7 +41,7 @@ export default function Navbar({
       <div className="container">
         <div className="navbar__inner">
           <a className="navbar__logo" href="/">
-            {logo}
+            <img src={logo} alt="Hello Bubbles" className="navbar__logo-img" />
           </a>
 
           <button

@@ -34,7 +34,7 @@ function Site() {
         <Hero {...hero} />
 
         <Menu />
-        <AboutUs {...about} />
+        <AboutUs/>
         {/* <ReservationCTA /> */}
         <Reviews />
         <Blogs />

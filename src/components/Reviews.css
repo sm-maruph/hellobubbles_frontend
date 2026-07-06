@@ -8,16 +8,98 @@
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-.reviews__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2.5vw, 1.5rem);
+/* ---------- CAROUSEL (single card) ---------- */
+.reviews__carousel {
+  position: relative;
+  max-width: 640px;
+  margin-inline: auto;
 }
 
-@media (max-width: 860px) {
-  .reviews__grid {
-    grid-template-columns: 1fr;
-    max-width: 520px;
-    margin-inline: auto;
+.reviews__viewport {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.reviews__track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.reviews__slide {
+  flex: 0 0 100%;       /* one card per view */
+  min-width: 0;
+  /* padding so the card isn't clipped by the rounded viewport edge */
+  padding: 2px;
+}
+
+/* arrows */
+.reviews__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-heading);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.reviews__nav--prev { left: -10px; }
+.reviews__nav--next { right: -10px; }
+.reviews__nav:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* dots */
+.reviews__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.reviews__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background 0.15s ease, width 0.15s ease;
+}
+.reviews__dot.is-active {
+  width: 22px;
+  border-radius: 6px;
+  background: var(--color-primary);
+}
+
+/* mobile: take arrows out of the card and put them below, beside the dots */
+@media (max-width: 560px) {
+  .reviews__nav {
+    position: static;          /* stop overlapping the card */
+    transform: none;
   }
+
+  /* rebuild the bottom bar: prev · dots · next in one row */
+  .reviews__carousel {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "viewport viewport viewport"
+      "prev     dots     next";
+    align-items: center;
+    gap: 0.8rem 0;
+  }
+  .reviews__viewport { grid-area: viewport; }
+  .reviews__nav--prev { grid-area: prev; justify-self: start; }
+  .reviews__nav--next { grid-area: next; justify-self: end; }
+  .reviews__dots { grid-area: dots; margin-top: 0; }
 }

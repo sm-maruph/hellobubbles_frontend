@@ -72,9 +72,11 @@
   }
 }
 
+/* mobile: two items per row (was 1) */
 @media (max-width: 560px) {
   .menu__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
   }
   .menu__head {
     flex-direction: column;
