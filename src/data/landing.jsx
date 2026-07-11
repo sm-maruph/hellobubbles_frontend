@@ -19,7 +19,7 @@ export const landingData = {
   },
 
   hero: {
-    title: "Hello Bubbles — Savor the Flavor",
+    title: "Hello Bubbles — The Food Artisan",
     subtitle:
       "Indulge in our handcrafted dishes, where flavors meet love. Join us for an unforgettable culinary journey!",
     ctaLabel: "Make An Order",

@@ -31,7 +31,7 @@ function Site() {
     <>
       <Navbar logo={nav.logo} links={nav.links} qrHref="/qr" />
       <main>
-        <Hero {...hero} />
+        <Hero />
 
         <Menu />
         <AboutUs/>
