@@ -18,20 +18,12 @@ const XIcon = () => (
 const money = (n) => `$${(Number(n) || 0).toFixed(2)}`;
 
 const DEFAULT_RESTAURANT = {
-  name: "Eatery",
+  name: "Hello Bubbles",
   address: "782 S Westwood Blvd, Los Angeles, CA 90024",
   phone: "+1 (212) 555-1212",
   hours: "Mon–Sat: 9:00 AM – 12:00 PM · Sun: 6:00 AM – 12:00 PM",
 };
 
-/**
- * Pickup order popup.
- *  - open: boolean
- *  - items: [{ id, name, price, qty? }]
- *  - restaurant: details shown on the confirmation
- *  - onClose(): close the modal
- *  - onPlaced(order): called after a successful order
- */
 export default function OrderModal({
   open,
   items = [],
@@ -44,6 +36,8 @@ export default function OrderModal({
   const [phone, setPhone] = useState("");
   const [placed, setPlaced] = useState(false);
   const [orderNo, setOrderNo] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   // reset each time it opens
   useEffect(() => {
@@ -52,6 +46,8 @@ export default function OrderModal({
       setName("");
       setPhone("");
       setPlaced(false);
+      setError("");
+      setSubmitting(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
@@ -72,22 +68,37 @@ export default function OrderModal({
 
   const setQty = (i, delta) =>
     setLines((ls) =>
-      ls.map((l, idx) =>
-        idx === i ? { ...l, qty: Math.max(1, l.qty + delta) } : l
-      )
+      ls.map((l, idx) => (idx === i ? { ...l, qty: Math.max(1, l.qty + delta) } : l))
     );
 
   const totalItems = lines.reduce((s, l) => s + l.qty, 0);
   const total = lines.reduce((s, l) => s + (Number(l.price) || 0) * l.qty, 0);
   const valid = name.trim() && phone.trim().length >= 6 && lines.length > 0;
 
-  const place = (e) => {
+  const place = async (e) => {
     e.preventDefault();
-    if (!valid) return;
-    const no = `EAT-${Date.now().toString().slice(-6)}`;
-    setOrderNo(no);
-    setPlaced(true);
-    onPlaced?.({ orderNo: no, name, phone, items: lines, total });
+    if (!valid || submitting) return;
+    setError("");
+    setSubmitting(true);
+    const no = `HB-${Date.now().toString().slice(-6)}`;
+    try {
+      // onPlaced saves to Supabase (via the store). Await so we catch failures.
+      await onPlaced?.({
+        orderNo: no,
+        name: name.trim(),
+        phone: phone.trim(),
+        items: lines.map((l) => ({ id: l.id, name: l.name, price: Number(l.price) || 0, qty: l.qty })),
+        total,
+      });
+      setOrderNo(no);
+      setPlaced(true);
+    } catch (err) {
+      setError("Couldn't place your order. Please try again.");
+      // eslint-disable-next-line no-console
+      console.error("Order save failed:", err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -110,9 +121,7 @@ export default function OrderModal({
                     <span>{l.qty}</span>
                     <button type="button" onClick={() => setQty(i, 1)} aria-label="Increase">+</button>
                   </div>
-                  <span className="oline__price">
-                    {money((Number(l.price) || 0) * l.qty)}
-                  </span>
+                  <span className="oline__price">{money((Number(l.price) || 0) * l.qty)}</span>
                 </div>
               ))}
             </div>
@@ -140,13 +149,15 @@ export default function OrderModal({
               />
             </div>
 
+            {error && <p className="omodal__error">{error}</p>}
+
             <Button
               type="submit"
               variant="solid"
               className="omodal__submit"
-              disabled={!valid}
+              disabled={!valid || submitting}
             >
-              Place Order
+              {submitting ? "Placing…" : "Place Order"}
             </Button>
           </form>
         ) : (

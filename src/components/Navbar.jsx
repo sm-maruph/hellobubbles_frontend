@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
-import { useShop } from "../store/UseShop";
+import { useShop } from "../store/useShop";
 import { HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
 import "./Navbar.css";
 import logo from "../assets/hb_logo.png";

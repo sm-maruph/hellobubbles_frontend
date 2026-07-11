@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { applyTheme } from "../theme/theme";
-import { ShopProvider, useShop } from "../store/UseShop";
+import { ShopProvider, useShop } from "../store/useShop";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import AboutUs from "../components/AboutUs";

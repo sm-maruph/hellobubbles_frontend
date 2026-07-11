@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Button from "./Button";
-import { useShop } from "../store/UseShop";
+import { useShop } from "../store/useShop";
 import { HeartIcon, BagIcon, ReceiptIcon, XIcon, TrashIcon } from "./icons";
 import "./AccountDrawer.css";
 
@@ -156,7 +156,9 @@ export default function AccountDrawer() {
                 <div className="ocard" key={o.orderNo}>
                   <div className="ocard__head">
                     <strong>#{o.orderNo}</strong>
-                    <span>{fmtDate(o.date)}</span>
+                    <span className={`ocard__status ocard__status--${o.status || "new"}`}>
+                      {o.status || "new"}
+                    </span>
                   </div>
                   <p className="ocard__items">
                     {o.items.map((i) => `${i.name} ×${i.qty}`).join(", ")}
