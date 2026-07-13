@@ -7,7 +7,9 @@ import AboutUs from "../components/AboutUs";
 import Menu from "../components/Menu";
 // import ReservationCTA from "../components/ReservationCTA";
 import Reviews from "../components/Reviews";
-import Blogs from "../components/Blogs";
+// import Blogs from "../components/Blogs";
+import InstagramFeed from "./InstagramFeed";
+
 import BookTable from "../components/BookTable";
 import Footer from "../components/Footer";
 import AccountDrawer from "../components/AccountDrawer";
@@ -37,7 +39,9 @@ function Site() {
         <AboutUs/>
         {/* <ReservationCTA /> */}
         <Reviews />
-        <Blogs />
+        {/* <Blogs /> */}
+        <InstagramFeed />
+
         <Contact />        {/* ← before the footer */}
 
         {/* <BookTable onSubmit={(data) => console.log("Booking:", data)} /> */}
