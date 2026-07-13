@@ -1,6 +1,7 @@
 import Button from "./Button";
 import "./Hero.css";
 import heroImg from "../assets/fuscka.jpg";
+import heroLogo from "../assets/Hello_Bubbles_Logo.png";   // add at top of Hero.jsx
 
 export default function Hero({
   title = "Hello Bubbles — The Food Artisan",
@@ -17,8 +18,7 @@ export default function Hero({
     <section className="hero" id={id}>
       <div className="container">
         <div className="hero__head">
-          <h1 className="hero__title">{title}</h1>
-          <p className="hero__subtitle">{subtitle}</p>
+          <img className="hero__logo" src={heroLogo} alt={title} />          <p className="hero__subtitle">{subtitle}</p>
           <Button as="a" href={ctaHref} variant="outline">
             {ctaLabel}
           </Button>

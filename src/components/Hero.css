@@ -10,10 +10,11 @@
   text-align: center;
 }
 
-.hero__title {
-  font-size: var(--fs-hero);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+.hero__logo {
+  display: block;
+  width: min(90%, 620px);   /* big — caps at 620px on large screens */
+  height: auto;
+  margin: 0 auto 0.5rem;
 }
 
 .hero__subtitle {
@@ -47,4 +48,9 @@
   font-size: var(--fs-sm);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+@media (max-width: 560px) {
+  .hero__logo {
+    width: 85%;              /* scale down a little on phones */
+  }
 }
