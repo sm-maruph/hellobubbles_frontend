@@ -1,7 +1,7 @@
 import Button from "./Button";
 import "./Hero.css";
 import heroImg from "../assets/fuscka.jpg";
-import heroLogo from "../assets/Hello_Bubbles_Logo.png";   // add at top of Hero.jsx
+import heroLogo from "../assets/Hello_Bubbles_Logo_white.png";   // add at top of Hero.jsx
 
 export default function Hero({
   title = "Hello Bubbles — The Food Artisan",
