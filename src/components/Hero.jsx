@@ -18,7 +18,8 @@ export default function Hero({
     <section className="hero" id={id}>
       <div className="container">
         <div className="hero__head">
-          <img className="hero__logo" src={heroLogo} alt={title} />          <p className="hero__subtitle">{subtitle}</p>
+          <img className="hero__logo" src={heroLogo} alt={title} />         
+           <p className="hero__subtitle">{subtitle}</p>
           <Button as="a" href={ctaHref} variant="outline">
             {ctaLabel}
           </Button>
