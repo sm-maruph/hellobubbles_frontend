@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getQrGallery } from "../lib/api";        // adjust path if QrPage isn't in src/pages
 import QrGalleryModal from "../components/QrGalleryModal";
+import { getSettings } from "../lib/api";   // add to imports
 
 import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTiktok, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
@@ -22,6 +23,7 @@ export default function QrPage() {
   // inside the component:
   const [gallery, setGallery] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [offerImage, setOfferImage] = useState(null);
 
   useEffect(() => {
     let alive = true;
@@ -33,6 +35,12 @@ export default function QrPage() {
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       data.address || ""
     )}`;
+
+    useEffect(() => {
+  getSettings().then(({ data }) => {
+    if (data?.offer_image_url) setOfferImage(data.offer_image_url);
+  });
+}, []);
 
   return (
     <div className="fit-screen">
@@ -183,19 +191,15 @@ export default function QrPage() {
             )}
 
             {modal === "offer" && (
-              // <img
-              //   src={offer}
-              //   alt="Offer"
-              //   style={{
-              //     maxWidth: "100%",
-              //     maxHeight: "70dvh",
-              //     objectFit: "contain",
-              //   }}
-              // />
-              <>
-                <h3>Our Offer will be available soon!</h3>
-                <p>Thanks for your patience!</p>
-              </>
+              <img
+                src={offerImage || offer}
+                alt="Offer"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "70dvh",
+                  objectFit: "contain",
+                }}
+              />
             )}
 
             <button

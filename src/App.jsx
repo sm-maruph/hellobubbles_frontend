@@ -11,6 +11,7 @@ import AdminMenu from "./admin/pages/AdminMenu";
 import AdminOrders from "./admin/pages/AdminOrders";
 import AdminAbout from "./admin/pages/AdminAbout";
 import AdminReviews from "./admin/pages/AdminReviews";
+import AdminOffer from "./admin/pages/AdminOffer";
 import AdminQrGallery from "./admin/pages/AdminQrGallery";
 
 import AdminSettings from "./admin/pages/AdminSettings";
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="about" element={<AdminAbout />} />
           <Route path="reviews" element={<AdminReviews />} />
           <Route path="qr-gallery" element={<AdminQrGallery />} />
+          <Route path="offer" element={<AdminOffer />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
