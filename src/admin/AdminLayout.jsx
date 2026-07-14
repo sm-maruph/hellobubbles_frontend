@@ -20,6 +20,7 @@ export default function AdminLayout() {
           <NavLink to="/admin/menu" className="admin__link">Menu</NavLink>
           <NavLink to="/admin/about" className="admin__link">About images</NavLink>
           <NavLink to="/admin/reviews" className="admin__link">Reviews</NavLink>
+          <NavLink to="/admin/qr-gallery" className="admin__link">QR Gallery</NavLink>
           <NavLink to="/admin/settings" className="admin__link">Settings</NavLink>
         </nav>
         <div className="admin__sidebar-foot">

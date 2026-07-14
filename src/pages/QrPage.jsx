@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { getQrGallery } from "../lib/api";        // adjust path if QrPage isn't in src/pages
+import QrGalleryModal from "../components/QrGalleryModal";
+
 import { useNavigate } from "react-router-dom";
 import { FaInstagram, FaTiktok, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -16,11 +19,15 @@ import { restaurant as data } from "../data/restaurant";
 export default function QrPage() {
   const [modal, setModal] = useState(null); // "soon" | "offer" | null
   const navigate = useNavigate();
-  useEffect(() => {
-    document.body.classList.add("qr-lock");
-    return () => document.body.classList.remove("qr-lock"); // unlock on leave
-  }, []);
+  // inside the component:
+  const [gallery, setGallery] = useState([]);
+  const [selected, setSelected] = useState(null);
 
+  useEffect(() => {
+    let alive = true;
+    getQrGallery().then(({ data }) => { if (alive && data?.length) setGallery(data); });
+    return () => { alive = false; };
+  }, []);
   const mapsUrl =
     data.maps_url ||
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -39,7 +46,7 @@ export default function QrPage() {
           icon={<FaInstagram />}
           title="Follow us on Instagram"
           subtitle={data.instagram_handle}
-          caption="See our daily bubbles!"
+        // caption="See our daily bubbles!"
         />
 
         <LinkButton
@@ -47,7 +54,7 @@ export default function QrPage() {
           icon={<FcGoogle />}
           title="Leave a Google Review"
           subtitle={`★ ${data.rating} rating | ${data.review_count}+ Reviews`}
-          // extraLine="We love your feedback!"
+        // extraLine="We love your feedback!"
         />
 
         <LinkButton
@@ -73,7 +80,7 @@ export default function QrPage() {
               <div className="offer-media">
                 <OfferBadge size={42} />
                 <span className="offer-media__tag">
-                  GET 10% OFF YOUR NEXT DRINK
+                  Grab It Now!
                 </span>
               </div>
             }
@@ -84,8 +91,18 @@ export default function QrPage() {
         </div>
 
         <h2 className="wonders">Explore Our Bubble Wonders</h2>
-        <DrinkGallery drinks={data.drinks} />
-
+        <div className="drink-gallery">
+          {(gallery.length ? gallery : data.drinks).map((item, i) => (
+            <button
+              type="button"
+              className="drink-tile"
+              key={item.id ?? i}
+              onClick={() => setSelected(item)}
+            >
+              <img src={item.image_url || item.image} alt={item.title || ""} />
+            </button>
+          ))}
+        </div>
         <footer className="qr-footer">
           {/* <p className="qr-footer__url">{data.website_label}</p> */}
           <p>Made with love by {data.name}</p>
@@ -123,7 +140,9 @@ export default function QrPage() {
           </a>
         </footer>
       </div>
-
+      {selected && (
+        <QrGalleryModal item={selected} onClose={() => setSelected(null)} />
+      )}
       {modal && (
         <div
           onClick={() => setModal(null)}

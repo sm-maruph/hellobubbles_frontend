@@ -64,3 +64,15 @@ export const updateReview = (id, row) =>
   supabase.from("reviews").update(row).eq("id", id).select().single();
 export const deleteReview = (id) =>
   supabase.from("reviews").delete().eq("id", id);
+
+
+
+/* ---------- QR GALLERY ---------- */
+export const getQrGallery = () =>
+  supabase.from("qr_gallery").select("*").order("sort").order("created_at");
+export const createQrGalleryItem = (row) =>
+  supabase.from("qr_gallery").insert(row).select().single();
+export const updateQrGalleryItem = (id, row) =>
+  supabase.from("qr_gallery").update(row).eq("id", id).select().single();
+export const deleteQrGalleryItem = (id) =>
+  supabase.from("qr_gallery").delete().eq("id", id);
