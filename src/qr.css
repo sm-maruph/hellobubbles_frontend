@@ -231,7 +231,7 @@ body.qr-lock #root {
 
 .drink-gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: calc(var(--u) * 0.4);
 
   flex: 1 1 auto;            /* take the leftover space, but no more */
