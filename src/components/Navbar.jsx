@@ -5,11 +5,12 @@ import { HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
 import "./Navbar.css";
 import logo from "../assets/hb_logo.png";
 const DEFAULT_LINKS = [
-  { label: "About", href: "#about" },
   { label: "Menu", href: "#menu" },
-  { label: "Location", href: "#location" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about" },
+
+  // { label: "Location", href: "#location" },
+  { label: "Social", href: "#instagram" },
+  { label: "Contact", href: "#location" },
 ];
 
 function Count({ n }) {

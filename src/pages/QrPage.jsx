@@ -47,7 +47,7 @@ export default function QrPage() {
           icon={<FcGoogle />}
           title="Leave a Google Review"
           subtitle={`★ ${data.rating} rating | ${data.review_count}+ Reviews`}
-          extraLine="We love your feedback!"
+          // extraLine="We love your feedback!"
         />
 
         <LinkButton

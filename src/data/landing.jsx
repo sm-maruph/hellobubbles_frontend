@@ -9,11 +9,14 @@ export const landingData = {
   nav: {
     logo: "Hello Bubbles",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Menu", href: "#menu" },
-      { label: "Make an Order", href: "#menu" },
-      { label: "Blog", href: "#blog" },
-      { label: "Contact", href: "#contact" },
+      
+  { label: "Menu", href: "#menu" },
+    { label: "About", href: "#about" },
+
+  // { label: "Location", href: "#location" },
+  { label: "Social", href: "#instagram" },
+  { label: "Contact", href: "#location" },
+
     ],
     cta: { label: "Make an Order", href: "#menu" },
   },
