@@ -103,3 +103,16 @@
   .reviews__nav--next { grid-area: next; justify-self: end; }
   .reviews__dots { grid-area: dots; margin-top: 0; }
 }
+.review-card--skeleton {
+  min-height: 160px;
+  background: linear-gradient(90deg,
+    var(--color-surface) 25%,
+    rgba(255, 255, 255, 0.06) 37%,
+    var(--color-surface) 63%);
+  background-size: 400% 100%;
+  animation: reviews-shimmer 1.4s ease infinite;
+}
+@keyframes reviews-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}

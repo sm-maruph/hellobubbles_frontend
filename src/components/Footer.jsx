@@ -19,12 +19,11 @@ export default function Footer({
   links = DEFAULT_LINKS,
 
   addressTitle = "Address",
-  address = ["782 S Westwood Blvd, Los", "Angeles, CA 90024"],
+  address = ["15 Market Way, London, United Kingdom E14 6AH"],
 
   hoursTitle = "Hours",
   hours = [
-    "Monday – Saturday: 9:00 AM – 12:00 PM",
-    "Sunday : 6:00 AM – 12:00 PM",
+    "Everyday: 11:00 AM – 11:00 PM",
   ],
 
   brandName = "Hello Bubbles",

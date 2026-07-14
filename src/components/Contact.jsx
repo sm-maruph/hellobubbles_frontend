@@ -35,10 +35,10 @@ const ClockIcon = () => (
 export default function Contact({
   title = "Visit Us",
   subtitle = "Find us in the heart of the city — drop by, call ahead, or send a message.",
-  address = "782 S Westwood Blvd, Los Angeles, CA 90024",
-  phone = "+1 (212) 555-1212",
-  email = "hello@hellobubbles.com",
-  hours = ["Mon – Sat: 9:00 AM – 12:00 PM", "Sunday: 6:00 AM – 12:00 PM"],
+  address = "15 Market Way, London, United Kingdom E14 6AH",
+  phone = "07952 931101",
+  email = "info.foodartisan@gmail.com",
+  hours = ["Everyday: 11:00 AM – 11:00 PM"],
   mapQuery,
   id = "location",
 }) {
@@ -89,11 +89,14 @@ export default function Contact({
 
           <div className="contact__map">
             <iframe
-              title="Location map"
-              src={embedSrc}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.0029916556555!2d-0.018000323120721723!3d51.513161110282155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760319b50453e5%3A0x4684b2e495c6cd4d!2sHello%20Bubbles!5e0!3m2!1sen!2sbd!4v1783967391603!5m2!1sen!2sbd"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
               allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="Hello Bubbles Location"
             />
           </div>
         </div>

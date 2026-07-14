@@ -1,6 +1,6 @@
 import drink1 from "../assets/bubble_tea.jpg";
 import drink2 from "../assets/Smash_burger.jpg";
-import drink3 from "../assets/fuscka.jpg";
+import drink3 from "../assets/fuska.jpg";
 import drink4 from "../assets/fruit_salad.jpg";
 
 export const restaurant = {
@@ -18,7 +18,7 @@ export const restaurant = {
     offer_text: "10% off your next drink",
     offers_url: "https://hellobubbles.com/offers",
     website_label: "qr.hellobubbles.com",
-    address: "15 Market Wy, London E14 6AH, United Kingdom",
+    address: "15 Market Way, London, United Kingdom E14 6AH",
     phone: "+44 7952 931101",
     drinks: [
         { id: 1, name: "Bubble Tea", image_url: drink1, position: 1 },

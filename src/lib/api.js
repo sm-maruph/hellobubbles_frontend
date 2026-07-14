@@ -45,3 +45,22 @@ export const getSettings = () =>
 export const updateSettings = (row) =>
   supabase.from("settings").update({ ...row, updated_at: new Date().toISOString() })
     .eq("id", 1).select().single();
+
+
+    /* ---------- ABOUT IMAGES ---------- */
+export const getAboutImages = () =>
+  supabase.from("about_images").select("*").order("sort").order("created_at");
+export const createAboutImage = (row) =>
+  supabase.from("about_images").insert(row).select().single();
+export const deleteAboutImage = (id) =>
+  supabase.from("about_images").delete().eq("id", id);
+
+/* ---------- REVIEWS ---------- */
+export const getReviews = () =>
+  supabase.from("reviews").select("*").order("sort").order("created_at");
+export const createReview = (row) =>
+  supabase.from("reviews").insert(row).select().single();
+export const updateReview = (id, row) =>
+  supabase.from("reviews").update(row).eq("id", id).select().single();
+export const deleteReview = (id) =>
+  supabase.from("reviews").delete().eq("id", id);

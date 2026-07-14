@@ -9,6 +9,9 @@ import AdminLayout from "./admin/AdminLayout";
 import Login from "./admin/Login";
 import AdminMenu from "./admin/pages/AdminMenu";
 import AdminOrders from "./admin/pages/AdminOrders";
+import AdminAbout from "./admin/pages/AdminAbout";
+import AdminReviews from "./admin/pages/AdminReviews";
+
 import AdminSettings from "./admin/pages/AdminSettings";
 import "./theme/theme.css";   // ← add this, before any other CSS / App import
 
@@ -33,6 +36,8 @@ export default function App() {
           <Route index element={<AdminOrders />} />
           <Route path="orders" element={<AdminOrders />} />
           <Route path="menu" element={<AdminMenu />} />
+          <Route path="about" element={<AdminAbout />} />
+          <Route path="reviews" element={<AdminReviews />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
       </Routes>
