@@ -13,6 +13,8 @@ import AdminAbout from "./admin/pages/AdminAbout";
 import AdminReviews from "./admin/pages/AdminReviews";
 import AdminOffer from "./admin/pages/AdminOffer";
 import AdminQrGallery from "./admin/pages/AdminQrGallery";
+import AdminHero from "./admin/pages/AdminHero";
+
 
 import AdminSettings from "./admin/pages/AdminSettings";
 import "./theme/theme.css";   // ← add this, before any other CSS / App import
@@ -39,6 +41,7 @@ export default function App() {
           <Route path="orders" element={<AdminOrders />} />
           <Route path="menu" element={<AdminMenu />} />
           <Route path="about" element={<AdminAbout />} />
+          <Route path="hero" element={<AdminHero />} />
           <Route path="reviews" element={<AdminReviews />} />
           <Route path="qr-gallery" element={<AdminQrGallery />} />
           <Route path="offer" element={<AdminOffer />} />

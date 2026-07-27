@@ -76,3 +76,12 @@ export const updateQrGalleryItem = (id, row) =>
   supabase.from("qr_gallery").update(row).eq("id", id).select().single();
 export const deleteQrGalleryItem = (id) =>
   supabase.from("qr_gallery").delete().eq("id", id);
+
+
+/* ---------- HERO IMAGES (slider) ---------- */
+export const getHeroImages = () =>
+  supabase.from("hero_images").select("*").order("sort").order("created_at");
+export const createHeroImage = (row) =>
+  supabase.from("hero_images").insert(row).select().single();
+export const deleteHeroImage = (id) =>
+  supabase.from("hero_images").delete().eq("id", id);
