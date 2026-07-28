@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { createOrder, getOrdersByIds } from "../lib/api";
+import { supabase } from "../lib/supabase";
 /* Persistent store for favorites, cart and orders.
    Backed by localStorage so it survives refresh.
 */
@@ -47,6 +48,10 @@ const FALLBACK = {
   openDrawer: () => {},
   closeDrawer: () => {},
   restaurant: {},
+  orderNotification: null,
+  dismissOrderNotification: () => {},
+  notificationPermission: "unsupported",
+  enablePushNotifications: async () => "unsupported",
 };
 
 export function ShopProvider({ children, restaurant = {} }) {
@@ -55,6 +60,11 @@ export function ShopProvider({ children, restaurant = {} }) {
   const [favorites, setFavorites] = useState(initial.favorites || []);
   const [cart, setCart] = useState(initial.cart || []);
   const [orders, setOrders] = useState(initial.orders || []);
+  const ordersRef = useRef(initial.orders || []);
+  const [orderNotification, setOrderNotification] = useState(null);
+  const [notificationPermission, setNotificationPermission] = useState(() =>
+    typeof Notification === "undefined" ? "unsupported" : Notification.permission
+  );
 
   // Order modal
   const [draft, setDraft] = useState(null);
@@ -64,6 +74,7 @@ export function ShopProvider({ children, restaurant = {} }) {
 
   // Persist to localStorage
   useEffect(() => {
+    ordersRef.current = orders;
     try {
       localStorage.setItem(
         KEY,
@@ -77,6 +88,87 @@ export function ShopProvider({ children, restaurant = {} }) {
       // Ignore storage errors
     }
   }, [favorites, cart, orders]);
+
+  // Keep this customer's saved orders in sync. Realtime is immediate when the
+  // project permits it; polling is a reliable fallback for restrictive RLS setups.
+  useEffect(() => {
+    const showStatusUpdate = (updatedOrder) => {
+      const currentOrder = ordersRef.current.find(
+        (order) => order.id === updatedOrder.id
+      );
+      if (!currentOrder || currentOrder.status === updatedOrder.status) return;
+
+      const nextOrders = ordersRef.current.map((order) =>
+        order.id === updatedOrder.id
+          ? { ...order, status: updatedOrder.status }
+          : order
+      );
+      ordersRef.current = nextOrders;
+      setOrders(nextOrders);
+
+      const notification = {
+        id: updatedOrder.id,
+        orderNo: updatedOrder.order_no || currentOrder.orderNo,
+        status: updatedOrder.status,
+        items: updatedOrder.items || currentOrder.items || [],
+        total: updatedOrder.total ?? currentOrder.total,
+      };
+      setOrderNotification(notification);
+
+      if (
+        typeof Notification !== "undefined" &&
+        Notification.permission === "granted"
+      ) {
+        const statusLabel =
+          updatedOrder.status === "done"
+            ? "ready for pickup"
+            : updatedOrder.status;
+        const itemSummary = notification.items
+          .map((item) => `${item.name} ×${item.qty}`)
+          .join(", ");
+        const totalLabel =
+          notification.total == null
+            ? ""
+            : ` Total: £${Number(notification.total).toFixed(2)}.`;
+        new Notification("Hello Bubbles order update", {
+          body: `Order #${notification.orderNo || "Order"} is ${statusLabel}. ${itemSummary}.${totalLabel}`,
+          icon: "/favicon.ico",
+          tag: `order-${updatedOrder.id}`,
+          requireInteraction: true,
+        });
+      }
+    };
+
+    const pollStatuses = async () => {
+      const ids = ordersRef.current.map((order) => order.id).filter(Boolean);
+      if (!ids.length) return;
+      const { data, error } = await getOrdersByIds(ids);
+      if (error || !data) return;
+      data.forEach(showStatusUpdate);
+    };
+
+    const channel = supabase
+      .channel(`customer-orders-${crypto.randomUUID()}`)
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "orders" },
+        ({ new: updatedOrder }) => showStatusUpdate(updatedOrder)
+      )
+      .subscribe();
+
+    const intervalId = window.setInterval(pollStatuses, 5000);
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") pollStatuses();
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    pollStatuses();
+
+    return () => {
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      supabase.removeChannel(channel);
+    };
+  }, []);
 
   /* =========================
      Favorites
@@ -184,19 +276,6 @@ export function ShopProvider({ children, restaurant = {} }) {
     // no closeOrder() here — modal shows success
   };
 
-
-
-const refreshOrders = async () => {
-    const ids = orders.map((o) => o.id).filter(Boolean);
-    if (!ids.length) return;
-    const { data, error } = await getOrdersByIds(ids);
-    if (error || !data) return;
-    const statusById = Object.fromEntries(data.map((r) => [r.id, r.status]));
-    setOrders((prev) =>
-      prev.map((o) => (o.id && statusById[o.id] ? { ...o, status: statusById[o.id] } : o))
-    );
-  };
-
   /* =========================
      Drawer
   ========================= */
@@ -204,6 +283,13 @@ const refreshOrders = async () => {
   const openDrawer = (tab = "cart") => setDrawer(tab);
 
   const closeDrawer = () => setDrawer(null);
+  const dismissOrderNotification = () => setOrderNotification(null);
+  const enablePushNotifications = async () => {
+    if (typeof Notification === "undefined") return "unsupported";
+    const permission = await Notification.requestPermission();
+    setNotificationPermission(permission);
+    return permission;
+  };
 
   const value = {
     favorites,
@@ -234,6 +320,10 @@ const refreshOrders = async () => {
     closeDrawer,
 
     restaurant,
+    orderNotification,
+    dismissOrderNotification,
+    notificationPermission,
+    enablePushNotifications,
   };
 
   return (

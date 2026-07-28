@@ -15,12 +15,12 @@ const XIcon = () => (
   </svg>
 );
 
-const money = (n) => `$${(Number(n) || 0).toFixed(2)}`;
+const money = (n) => `£${(Number(n) || 0).toFixed(2)}`;
 
 const DEFAULT_RESTAURANT = {
   name: "Hello Bubbles",
-  address: "782 S Westwood Blvd, Los Angeles, CA 90024",
-  phone: "+1 (212) 555-1212",
+  address: "15 Market Way, London, United Kingdom E14 6AH",
+  phone: "07952 931101",
   hours: "Mon–Sat: 9:00 AM – 12:00 PM · Sun: 6:00 AM – 12:00 PM",
 };
 

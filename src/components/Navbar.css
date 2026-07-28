@@ -82,6 +82,107 @@
   color: var(--color-primary);
   background: rgba(255, 255, 255, 0.05);
 }
+.navbar__notification.is-active {
+  color: var(--color-primary);
+  background: rgba(214, 40, 40, 0.12);
+}
+.navbar__notification-wrap {
+  position: relative;
+}
+.navbar__notification-panel {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.65rem);
+  right: 0;
+  width: min(310px, calc(100vw - 2rem));
+  padding: 0.9rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+.navbar__notification-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.navbar__notification-head > button {
+  color: var(--color-text);
+  background: transparent;
+  border: 0;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.navbar__notification-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-top: 0.75rem;
+}
+.navbar__notification-detail > span {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.navbar__notification-detail p,
+.navbar__notification-empty {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-sm);
+}
+.navbar__notification-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  max-height: 150px;
+  margin: 0.35rem 0 0;
+  padding: 0.55rem 0;
+  overflow-y: auto;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  list-style: none;
+}
+.navbar__notification-items li,
+.navbar__notification-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: var(--fs-sm);
+}
+.navbar__notification-items li span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.navbar__notification-total {
+  padding-top: 0.25rem;
+  color: var(--color-heading);
+}
+.navbar__notification-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+}
+.navbar__notification-actions button {
+  padding: 0.45rem 0.65rem;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.navbar__notification-actions button:first-child {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.navbar__notification-empty {
+  padding-top: 0.75rem;
+}
 
 .navbar__count {
   position: absolute;

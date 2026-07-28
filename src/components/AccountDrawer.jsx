@@ -4,7 +4,7 @@ import { useShop } from "../store/useShop";
 import { HeartIcon, BagIcon, ReceiptIcon, XIcon, TrashIcon } from "./icons";
 import "./AccountDrawer.css";
 
-const money = (n) => `$${(Number(n) || 0).toFixed(2)}`;
+const money = (n) => `£${(Number(n) || 0).toFixed(2)}`;
 const fmtDate = (iso) => {
   try {
     return new Date(iso).toLocaleString([], {

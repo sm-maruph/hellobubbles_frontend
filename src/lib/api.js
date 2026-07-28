@@ -27,16 +27,56 @@ export const deleteMenuItem = (id) =>
   supabase.from("menu_items").delete().eq("id", id);
 
 /* ---------- ORDERS ---------- */
-export const getOrders = () =>
-  supabase.from("orders").select("*").order("created_at", { ascending: false });
+export const getOrders = ({
+  page = 1,
+  pageSize = 9,
+  status,
+  createdFrom,
+  createdTo,
+} = {}) => {
+  const from = (page - 1) * pageSize;
+  let query = supabase
+    .from("orders")
+    .select("*", { count: "exact" })
+    .order("created_at", { ascending: false })
+    .range(from, from + pageSize - 1);
+
+  if (status) query = query.eq("status", status);
+  if (createdFrom) query = query.gte("created_at", createdFrom);
+  if (createdTo) query = query.lt("created_at", createdTo);
+
+  return query;
+};
 
 export const createOrder = (row) =>
   supabase.from("orders").insert(row).select().single();
 export const getOrdersByIds = (ids) =>
-  supabase.from("orders").select("id,status").in("id", ids);
+  supabase
+    .from("orders")
+    .select("id,status,order_no,items,total")
+    .in("id", ids);
 
 export const updateOrderStatus = (id, status) =>
   supabase.from("orders").update({ status }).eq("id", id);
+
+export const deleteOrder = async (id) => {
+  const { data, error } = await supabase
+    .from("orders")
+    .delete()
+    .eq("id", id)
+    .select("id");
+
+  if (error) return { data, error };
+  if (!data?.length) {
+    return {
+      data,
+      error: new Error(
+        "Order was not deleted. The Supabase orders table is missing an authenticated DELETE policy."
+      ),
+    };
+  }
+  return { data, error: null };
+};
 
 /* ---------- SETTINGS (single row id = 1) ---------- */
 export const getSettings = () =>

@@ -19,7 +19,7 @@ const CartIcon = () => (
 
 /**
  * A single menu item card with pickup ordering actions.
- * `price` accepts a number (formatted as $0.00) or a preformatted string.
+ * `price` accepts a number (formatted as £0.00) or a preformatted string.
  */
 export default function MenuCard({
   name,
@@ -33,7 +33,7 @@ export default function MenuCard({
   onOrder,
 }) {
   const priceLabel =
-    typeof price === "number" ? `$${price.toFixed(2)}` : price;
+    typeof price === "number" ? `£${price.toFixed(2)}` : price;
 
   return (
     <article className="menu-card">

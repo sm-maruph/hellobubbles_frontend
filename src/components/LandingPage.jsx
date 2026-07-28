@@ -14,6 +14,7 @@ import BookTable from "../components/BookTable";
 import Footer from "../components/Footer";
 import AccountDrawer from "../components/AccountDrawer";
 import OrderModal from "../components/OrderModal";
+import OrderStatusNotification from "../components/OrderStatusNotification";
 import { landingData } from "../data/landing";
 import Contact from "../components/Contact";
 
@@ -46,10 +47,11 @@ function Site() {
 
         {/* <BookTable onSubmit={(data) => console.log("Booking:", data)} /> */}
       </main>
-      <Footer />
+      <Footer links={nav.links} />
 
       {/* global overlays driven by the store */}
       <AccountDrawer />
+      <OrderStatusNotification />
       <OrderModal
         open={!!draft}
         items={draft?.items || []}

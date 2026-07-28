@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 import { useShop } from "../store/useShop";
-import { HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
+import { BellIcon, HeartIcon, BagIcon, ReceiptIcon, QrIcon } from "./icons";
 import "./Navbar.css";
 import logo from "../assets/hb_logo.png";
 const DEFAULT_LINKS = [
@@ -24,7 +24,19 @@ export default function Navbar({
   qrHref = "/qr",
 }) {
   const [open, setOpen] = useState(false);
-  const { favCount, cartCount, ordersCount, openDrawer, orderCart, cart } = useShop();
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const {
+    favCount,
+    cartCount,
+    ordersCount,
+    openDrawer,
+    orderCart,
+    cart,
+    orderNotification,
+    notificationPermission,
+    enablePushNotifications,
+    dismissOrderNotification,
+  } = useShop();
 
   const close = () => setOpen(false);
   const goDrawer = (tab) => {
@@ -36,6 +48,18 @@ export default function Navbar({
     else openDrawer("cart");
     close();
   };
+  const openNotifications = async () => {
+    if (notificationPermission === "default") {
+      await enablePushNotifications();
+    }
+    setNotificationsOpen((current) => !current);
+  };
+  const notificationStatus =
+    orderNotification?.status === "done"
+      ? "Ready for pickup"
+      : orderNotification?.status
+        ? orderNotification.status[0].toUpperCase() + orderNotification.status.slice(1)
+        : "";
 
   return (
     <header className="navbar">
@@ -94,6 +118,98 @@ export default function Navbar({
                 <ReceiptIcon />
                 <Count n={ordersCount} />
               </button>
+
+              <div className="navbar__notification-wrap">
+                <button
+                  className={`navbar__icon navbar__notification ${
+                    orderNotification ? "is-active" : ""
+                  }`}
+                  aria-label={
+                    notificationPermission === "default"
+                      ? "Enable push notifications"
+                      : "Order notifications"
+                  }
+                  aria-expanded={notificationsOpen}
+                  title={
+                    notificationPermission === "default"
+                      ? "Enable push notifications"
+                      : notificationPermission === "denied"
+                        ? "Push notifications are blocked in browser settings"
+                        : "Order notifications"
+                  }
+                  onClick={openNotifications}
+                >
+                  <BellIcon />
+                  <Count n={orderNotification ? 1 : 0} />
+                </button>
+
+                {notificationsOpen && (
+                  <div className="navbar__notification-panel">
+                    <div className="navbar__notification-head">
+                      <strong>Notifications</strong>
+                      <button
+                        type="button"
+                        aria-label="Close notifications"
+                        onClick={() => setNotificationsOpen(false)}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    {orderNotification ? (
+                      <div className="navbar__notification-detail">
+                        <span>Order update</span>
+                        <strong>
+                          #{orderNotification.orderNo || "Order"}
+                        </strong>
+                        <p>Your order is {notificationStatus}.</p>
+                        {!!orderNotification.items?.length && (
+                          <ul className="navbar__notification-items">
+                            {orderNotification.items.map((item, index) => (
+                              <li key={`${item.id || item.name}-${index}`}>
+                                <span>{item.name}</span>
+                                <strong>×{item.qty}</strong>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {orderNotification.total != null && (
+                          <div className="navbar__notification-total">
+                            <span>Total</span>
+                            <strong>
+                              £{Number(orderNotification.total).toFixed(2)}
+                            </strong>
+                          </div>
+                        )}
+                        <div className="navbar__notification-actions">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              openDrawer("orders");
+                              setNotificationsOpen(false);
+                              close();
+                            }}
+                          >
+                            View order
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              dismissOrderNotification();
+                              setNotificationsOpen(false);
+                            }}
+                          >
+                            Dismiss
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="navbar__notification-empty">
+                        No new order updates.
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
 
               <a
                 className="navbar__qr"

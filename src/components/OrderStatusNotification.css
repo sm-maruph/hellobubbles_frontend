@@ -1,0 +1,75 @@
+.order-status-alert {
+  position: fixed;
+  z-index: 1200;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  width: min(390px, calc(100vw - 2rem));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  color: #fff;
+  background: #211b18;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-left: 4px solid #d62828;
+  border-radius: 12px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+
+.order-status-alert--preparing { border-left-color: #e0a02a; }
+.order-status-alert--done { border-left-color: #4ade80; }
+.order-status-alert--cancelled { border-left-color: #888; }
+
+.order-status-alert__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.order-status-alert__eyebrow {
+  color: #b9afa7;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.order-status-alert__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.order-status-alert button {
+  padding: 0.45rem 0.65rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.order-status-alert button:hover {
+  border-color: #d62828;
+  color: #ff7777;
+}
+
+.order-status-alert .order-status-alert__close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font-size: 1.25rem;
+}
+
+@media (max-width: 520px) {
+  .order-status-alert {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .order-status-alert__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
