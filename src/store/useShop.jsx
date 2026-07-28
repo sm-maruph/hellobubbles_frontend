@@ -229,6 +229,7 @@ export function ShopProvider({ children, restaurant = {} }) {
   ========================= */
 
   const orderItems = (items) => {
+    setDrawer(null);
     setDraft({
       items: items.map((item) => ({
         ...item,
@@ -240,6 +241,7 @@ export function ShopProvider({ children, restaurant = {} }) {
 
   const orderCart = () => {
     if (cart.length) {
+      setDrawer(null);
       setDraft({
         items: cart,
         fromCart: true,

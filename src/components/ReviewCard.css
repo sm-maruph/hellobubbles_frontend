@@ -1,4 +1,6 @@
 .review-card {
+  width: 100%;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

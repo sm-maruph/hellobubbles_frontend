@@ -1,6 +1,8 @@
 .menu-card {
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  cursor: pointer;
   height: 100%;                 /* fill the grid cell → siblings match height */
 }
 

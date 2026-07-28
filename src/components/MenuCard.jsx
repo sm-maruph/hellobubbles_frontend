@@ -31,12 +31,18 @@ export default function MenuCard({
   onToggleBookmark,
   onAddToCart,
   onOrder,
+  onView,
 }) {
   const priceLabel =
     typeof price === "number" ? `£${price.toFixed(2)}` : price;
 
   return (
-    <article className="menu-card">
+    <article
+      className="menu-card"
+      onClick={(event) => {
+        if (!event.target.closest("button, a")) onView?.();
+      }}
+    >
       <div className="menu-card__media">
         {image ? (
           <img src={image} alt={imageAlt || name} loading="lazy" />
