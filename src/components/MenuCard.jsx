@@ -28,6 +28,7 @@ export default function MenuCard({
   imageAlt = "",
   bookmarked = false,
   inCart = false,
+  topSeller,
   onToggleBookmark,
   onAddToCart,
   onOrder,
@@ -48,6 +49,16 @@ export default function MenuCard({
           <img src={image} alt={imageAlt || name} loading="lazy" />
         ) : (
           <span className="menu-card__ph">No image</span>
+        )}
+
+        {topSeller && (
+          <span
+            className="menu-card__top-seller"
+            title={`Today's #${topSeller.rank} bestseller · ${topSeller.quantity} sold`}
+            aria-label={`Today's number ${topSeller.rank} bestseller`}
+          >
+            <span aria-hidden="true">🔥</span>
+          </span>
         )}
 
         <button

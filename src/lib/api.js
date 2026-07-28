@@ -17,6 +17,12 @@ export async function uploadImage(file, folder = "menu") {
 export const getMenu = () =>
   supabase.from("menu_items").select("*").order("sort").order("created_at");
 
+export const getTopMenuItems = (createdFrom, createdTo) =>
+  supabase.rpc("get_top_menu_items", {
+    p_start: createdFrom,
+    p_end: createdTo,
+  });
+
 export const createMenuItem = (row) =>
   supabase.from("menu_items").insert(row).select().single();
 

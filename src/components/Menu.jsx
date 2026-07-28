@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import MenuCard from "./MenuCard";
 import { useShop } from "../store/useShop";
-import { getMenu } from "../lib/api";
+import { getMenu, getTopMenuItems } from "../lib/api";
 import { BagIcon } from "./icons";
 import "./Menu.css";
 
@@ -95,6 +95,7 @@ export default function Menu({
   const [pageSize, setPageSize] = useState("10");
   const [page, setPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [topSellers, setTopSellers] = useState({});
 
   useEffect(() => {
     let alive = true;
@@ -126,6 +127,36 @@ export default function Menu({
     };
   }, []);
 
+  useEffect(() => {
+    let alive = true;
+    const loadTopSellers = async () => {
+      const from = new Date();
+      from.setHours(0, 0, 0, 0);
+      const to = new Date(from);
+      to.setDate(to.getDate() + 1);
+      const { data, error } = await getTopMenuItems(
+        from.toISOString(),
+        to.toISOString()
+      );
+        if (!alive || error || !data) return;
+        setTopSellers(
+          Object.fromEntries(
+            data.map((row, index) => [
+              String(row.item_id),
+              { rank: index + 1, quantity: Number(row.quantity) || 0 },
+            ])
+          )
+        );
+    };
+    loadTopSellers();
+    const intervalId = window.setInterval(loadTopSellers, 30000);
+
+    return () => {
+      alive = false;
+      window.clearInterval(intervalId);
+    };
+  }, []);
+
   const categories = getCategories(items);
   const categoryItems =
     activeCat === "All"
@@ -135,6 +166,13 @@ export default function Menu({
     if (sortBy === "price-low") return a.price - b.price;
     if (sortBy === "price-high") return b.price - a.price;
     if (sortBy === "popular") {
+      const aToday = topSellers[String(a.id)];
+      const bToday = topSellers[String(b.id)];
+      if (aToday || bToday) {
+        if (!aToday) return 1;
+        if (!bToday) return -1;
+        return aToday.rank - bToday.rank;
+      }
       return (
         Number(b.popular) - Number(a.popular) ||
         b.popularity - a.popularity ||
@@ -259,7 +297,13 @@ export default function Menu({
                   {...item}
                   bookmarked={isFavorite(item.id)}
                   inCart={inCart(item.id)}
-                  onView={() => setSelectedItem(item)}
+                  topSeller={topSellers[String(item.id)]}
+                  onView={() =>
+                    setSelectedItem({
+                      ...item,
+                      todaySales: topSellers[String(item.id)]?.quantity,
+                    })
+                  }
                   onToggleBookmark={() => toggleFavorite(item)}
                   onAddToCart={() => addToCart(item)}
                   onOrder={() => orderItems([item])}
@@ -341,8 +385,25 @@ export default function Menu({
                 <div className="menu-detail__orders">
                   <span className="menu-detail__orders-icon" aria-hidden="true">🔥</span>
                   <div>
-                    <strong>{selectedItem.orderCount || 0}</strong>
-                    <span>orders received for this item</span>
+                    {Number(selectedItem.todaySales ?? selectedItem.orderCount) > 0 ? (
+                      <>
+                        <strong>
+                          A favourite today
+                        </strong>
+                        <span>
+                          Already picked by{" "}
+                          {Number(selectedItem.todaySales ?? selectedItem.orderCount)}{" "}
+                          {Number(selectedItem.todaySales ?? selectedItem.orderCount) === 1
+                            ? "customer"
+                            : "customers"}.
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <strong>Be the first to order this today</strong>
+                        <span>Freshly prepared and ready for pickup</span>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="menu-detail__actions">

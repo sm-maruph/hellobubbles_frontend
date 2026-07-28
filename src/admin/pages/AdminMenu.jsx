@@ -4,7 +4,14 @@ import {
 } from "../../lib/api";
 import "../admin.css";
 
-const EMPTY = { name: "", price: "", category: "", image_url: "", available: true };
+const EMPTY = {
+  name: "",
+  price: "",
+  category: "",
+  description: "",
+  image_url: "",
+  available: true,
+};
 
 export default function AdminMenu() {
   const [items, setItems] = useState([]);
@@ -48,6 +55,7 @@ export default function AdminMenu() {
       name: form.name.trim(),
       price: Number(form.price) || 0,
       category: form.category.trim() || null,
+      description: form.description.trim() || null,
       image_url: form.image_url || null,
       available: !!form.available,
     };
@@ -64,6 +72,7 @@ export default function AdminMenu() {
     setEditingId(it.id);
     setForm({
       name: it.name, price: it.price, category: it.category || "",
+      description: it.description || "",
       image_url: it.image_url || "", available: it.available,
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -95,6 +104,15 @@ export default function AdminMenu() {
           <label className="admin-field">
             <span>Category</span>
             <input value={form.category} onChange={set("category")} placeholder="e.g. Burger, Drinks" />
+          </label>
+          <label className="admin-field admin-field--full">
+            <span>Description</span>
+            <textarea
+              rows="4"
+              value={form.description}
+              onChange={set("description")}
+              placeholder="Describe the flavour, ingredients, or what makes this item special"
+            />
           </label>
           <label className="admin-field admin-field--check">
             <input type="checkbox" checked={form.available} onChange={set("available")} />

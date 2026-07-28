@@ -33,6 +33,36 @@
   font-size: var(--fs-sm);
 }
 
+.menu-card__top-seller {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  align-items: center;
+  padding: 0;
+  color: var(--color-on-primary);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 0.68rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.menu-card__top-seller > span {
+  font-size: 1.15rem;
+  transform-origin: 50% 100%;
+  animation: top-seller-flame 0.8s ease-in-out infinite alternate;
+}
+@keyframes top-seller-flame {
+  from { transform: rotate(-7deg) scale(.9, 1); }
+  to { transform: rotate(6deg) scale(1.08, .94); }
+}
+
 /* bookmark on the image */
 .menu-card__bookmark {
   position: absolute;
