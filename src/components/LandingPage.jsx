@@ -20,7 +20,7 @@ import Contact from "../components/Contact";
 
 const RESTAURANT = {
   name: "Hello Bubbles",
-  address: "782 S Westwood Blvd, Los Angeles, CA 90024",
+  address: "15 Market Way, London, United Kingdom E14 6AH",
   phone: "+1 (212) 555-1212",
   hours: "Mon–Sat: 9:00 AM – 12:00 PM · Sun: 6:00 AM – 12:00 PM",
 };
