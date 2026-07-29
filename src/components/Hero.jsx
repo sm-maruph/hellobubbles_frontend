@@ -2,7 +2,6 @@ import { useState, useEffect, useCallback } from "react";
 import Button from "./Button";
 import { getHeroImages } from "../lib/api";
 import "./Hero.css";
-import heroImg from "../assets/fuska.jpg";
 import heroLogo from "../assets/Hello_Bubbles_Logo_white.png";
 
 export default function Hero({
@@ -25,7 +24,7 @@ export default function Hero({
     return () => { alive = false; };
   }, []);
 
-  const slides = images.length ? images : [heroImg];   // fallback to bundled image
+  const slides = images;
 
   const go = useCallback((i) => setIndex((i + slides.length) % slides.length), [slides.length]);
 
@@ -51,19 +50,25 @@ export default function Hero({
         </div>
 
         <figure className="hero__media">
-          <div className="hero__viewport">
-            <div className="hero__track" style={{ transform: `translateX(-${index * 100}%)` }}>
-              {slides.map((src, i) => (
-                <img
-                  className="hero__slide"
-                  src={src}
-                  alt={imageAlt}
-                  key={i}
-                  loading={i === 0 ? "eager" : "lazy"}
-                />
-              ))}
+          {slides.length ? (
+            <div className="hero__viewport">
+              <div className="hero__track" style={{ transform: `translateX(-${index * 100}%)` }}>
+                {slides.map((src, i) => (
+                  <img
+                    className="hero__slide"
+                    src={src}
+                    alt={imageAlt}
+                    key={i}
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="hero__loader" role="status" aria-label="Loading hero images">
+              <span className="hero__spinner" />
+            </div>
+          )}
 
           {slides.length > 1 && (
             <div className="hero__dots">
